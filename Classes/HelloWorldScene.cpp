@@ -1,7 +1,7 @@
 #include "HelloWorldScene.h"
 //#include "cocostudio/CocoStudio.h"
 #include"initScene.h"
-
+#Â include"net.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 
@@ -31,16 +31,16 @@ bool HelloWorld::init()
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto bg = Sprite::create("dengluBG.png");//µÇÂ¼±³¾°
+	auto bg = Sprite::create("dengluBG.png");//ç™»å½•èƒŒæ™¯
 	bg->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	addChild(bg);
 
-	//auto loadingBG = Sprite::create("loadingBG.png");//½ø¶ÈÌõ±³¾°
+	//auto loadingBG = Sprite::create("loadingBG.png");//è¿›åº¦æ¡èƒŒæ™¯
 	//loadingBG->setTag(2);
 	//loadingBG->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	//addChild(loadingBG);
 
-	//auto loadingBar = Sprite::create();//½ø¶ÈÌõ
+	//auto loadingBar = Sprite::create();//è¿›åº¦æ¡
 	//loadingBar->setTag(1);
 	//auto part1 = Sprite::create("loadingBar.png");
 	//part1->setPosition(part1->getContentSize().width / 2, part1->getContentSize().height / 2);
@@ -57,6 +57,7 @@ bool HelloWorld::init()
 	//loadingBar->setAnchorPoint(Vec2(0, 0.5));
 	//addChild(loadingBar);
 	//schedule(schedule_selector(HelloWorld::updateBar), 0.4, 20, 0);
+	Net::getInstance()->makeClient();
 	auto layerDL = InitScene::create();
 	layerDL->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	layerDL->ignoreAnchorPointForPosition(false);
@@ -65,7 +66,7 @@ bool HelloWorld::init()
 	
     return true;
 }
-cocos2d::Sprite * HelloWorld::makeButton(std::string name, std::string bgSprite)//ºÏ³É°´Å¥Í¼°¸
+cocos2d::Sprite * HelloWorld::makeButton(std::string name, std::string bgSprite)//åˆæˆæŒ‰é’®å›¾æ¡ˆ
 {
 	Sprite* button = Sprite::create();
 	Sprite* leftPart = Sprite::create(bgSprite);
@@ -90,12 +91,12 @@ cocos2d::Sprite * HelloWorld::makeButton(std::string name, std::string bgSprite)
 	return button;
 }
 
-void HelloWorld::updateBar(float dt)//¸üÐÂ½ø¶ÈÌõ
+void HelloWorld::updateBar(float dt)//æ›´æ–°è¿›åº¦æ¡
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 pos = Vec2(getChildByTag(1)->getPosition().x + getChildByTag(1)->getContentSize().width / 3, getChildByTag(1)->getPosition().y);
-	if (pos.x > 565 * visibleSize.width / 960)//³¬³öÓÒ±ß½ç
-		pos.x = 280 * visibleSize.width / 960;//ÉèÖÃÎª×ó±ß½ç
+	if (pos.x > 565 * visibleSize.width / 960)//è¶…å‡ºå³è¾¹ç•Œ
+		pos.x = 280 * visibleSize.width / 960;//è®¾ç½®ä¸ºå·¦è¾¹ç•Œ
 	getChildByTag(1)->setPosition(pos);
 	static int times = 0;
 	if (times == 20)
