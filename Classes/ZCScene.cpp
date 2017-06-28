@@ -94,6 +94,7 @@ bool ZC::init()
 	selectedSprite->setContentSize(selectedSprite->getContentSize() * 0.63);
 	MenuItemSprite* buttonDL = MenuItemSprite::create(normalSprite, selectedSprite, [](Ref* sender) {
 		log("ok");
+		Net::getInstance()->sendStringC("wo zhu che le !");
 	});
 
 	auto nqSprite = Sprite::create("quxiao.png");
